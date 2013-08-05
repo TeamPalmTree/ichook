@@ -1,6 +1,6 @@
 <?php
 
-class Icecast {
+class IcecastHook {
 
     private $host;
     private $port;
