@@ -22,13 +22,15 @@ class IcecastHook {
 
         // create a new curl resource
         $curl = curl_init();
-        // set url & port
-        curl_setopt($curl, CURLOPT_URL, $this->host . ':' . $this->port . self::$stats_path);
+        // set header url & port
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_URL, 'http://' . $this->host . ':' . $this->port . self::$stats_path);
         // set authentication parameters
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $this->username . ':' . $this->password);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
         // return as a string
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         // output stats
         $xml = curl_exec($curl);
         // close curl resource to free up system resources
