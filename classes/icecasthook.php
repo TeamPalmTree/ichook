@@ -56,6 +56,8 @@ class IcecastHook {
             return $statistics['source'];
         // get all sources
         $statistics_sources = $statistics['source'];
+        // add a slash to mount
+        $mount = '/' . $mount;
         // we have many sources, find the right one
         foreach ($statistics_sources as $statistics_source) {
             if ($statistics_source['@attributes']['mount'] == $mount)
